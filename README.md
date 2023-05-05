@@ -1,7 +1,7 @@
 <h1>Live Demo: </h1>
-<ul>
-click here<a>https://onitotest.vercel.app/<a>
-  </ul>
+
+<a>https://onitotest.vercel.app/<a>
+
 
 <h4>after cloning, open terminal in project directory and run:</h4>
   <code>npm i</code>
