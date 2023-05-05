@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Onito Test Task</title>
+        <title>Onito Test-Task</title>
         <meta
           name='description'
           content='this is a test task for react developer position'
