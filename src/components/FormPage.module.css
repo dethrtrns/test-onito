@@ -1,0 +1,106 @@
+.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.subheading {
+  margin-bottom: 10px;
+}
+
+.formSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.formSection:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.formContainer label {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.formContainer input,
+.formContainer select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.formContainer input[type="submit"] {
+  width: auto;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+.buttonContainer {
+  padding-right: 10px;
+  display: flex;
+  width: 100%;
+  /* direction: "row"; */
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.cancelButton {
+  margin-left: 10px;
+  border: 1px solid red;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: rgba(255, 0, 0, 0.104);
+  color: red;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.submitButton {
+  margin-left: 10px;
+  border: 0px solid red;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+/* 
+.button-container button {
+  margin-left: 10px;
+} */
+
+.buttonContainer button:hover {
+  opacity: 0.7;
+  transform: translateY(3px);
+  color: aliceblue;
+}
+
+.required {
+  font-weight: bold;
+}
+.required:before {
+  color: #e32;
+  content: "*";
+}
+
+.formError {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+@media screen and (min-width: 576px) {
+  .formSection label {
+    width: calc(50% - 1rem);
+    margin-right: 1rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .formSection label {
+    width: calc(33.33% - 1rem);
+    margin-right: 1rem;
+  }
+}
