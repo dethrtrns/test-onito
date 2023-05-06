@@ -25,27 +25,61 @@ import { useForm, yupResolver } from "@mantine/form";
 const schema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   age: Yup.number()
+    .typeError("Age must be a number")
     .required("Age is required")
     .positive("Age must be a positive number")
     .integer("Age must be an integer"),
   sex: Yup.string().required("Sex is required"),
-  mobile: Yup.string().matches(
-    /^(?:\+91|0)?[6-9]\d{9}$/,
-    "Mobile number must be a valid Indian mobile number"
+  mobile: Yup.string().test(
+    "is-valid",
+    "Mobile number must be a valid Indian mobile number",
+    function (value) {
+      const { createError } = this;
+      if (!value || value.trim() === "") {
+        return true; // Field is optional, no validation needed
+      }
+      const mobileNumberRegex = /^(?:\+91|0)?[6-9]\d{9}$/;
+      return mobileNumberRegex.test(value) || createError();
+    }
   ),
-  emergencyContact: Yup.string().matches(
-    /^(?:\+91|0)?[6-9]\d{9}$/,
-    "Mobile number must be a valid Indian mobile number"
+  emergencyContact: Yup.string().test(
+    "is-valid",
+    "Mobile number must be a valid Indian mobile number",
+    function (value) {
+      const { createError } = this;
+      if (!value || value.trim() === "") {
+        return true; // Field is optional, no validation needed
+      }
+      const mobileNumberRegex = /^(?:\+91|0)?[6-9]\d{9}$/;
+      return mobileNumberRegex.test(value) || createError();
+    }
   ),
   idType: Yup.string(),
   govtId: Yup.string().when("idType", {
     is: "Aadhar",
     then: (schema) =>
-      schema.matches(/^\d{12}$/, "Aadhar number must be 12 digits"),
+      schema.test(
+        "is-valid",
+        "Aadhar number must be 12 digits",
+        function (value) {
+          const { createError } = this;
+          if (!value || value.trim() === "") {
+            return true; // Field is optional, no validation needed
+          }
+          return /^\d{12}$/.test(value) || createError();
+        }
+      ),
     otherwise: (schema) =>
-      schema.matches(
-        /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
-        "PAN number must be 10 alphanumeric characters"
+      schema.test(
+        "is-valid",
+        "PAN number must be 10 alphanumeric characters",
+        function (value) {
+          const { createError } = this;
+          if (!value || value.trim() === "") {
+            return true; // Field is optional, no validation needed
+          }
+          return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value) || createError();
+        }
       ),
   }),
 });
@@ -66,8 +100,9 @@ const RegistrationForm = ({ onClose }) => {
   const [notify, setNotify] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const form = useForm({
-    clearInputErrorOnChange: true,
     validateInputOnChange: true,
+    clearInputErrorOnChange: true,
+    validateInputOnBlur: true,
     validate: yupResolver(schema),
     initialValues: {
       name: "",
@@ -173,7 +208,7 @@ const RegistrationForm = ({ onClose }) => {
             disabled={loading}
             label='Date of Birth or Age'
             required
-            placeholder='DD/MM/YYYY or Age in Years'
+            placeholder='Enter Age in Years'
             {...form.getInputProps("age")}
           />
           <Select
@@ -189,6 +224,7 @@ const RegistrationForm = ({ onClose }) => {
             disabled={loading}
             label='Mobile'
             placeholder='Enter Mobile'
+            clearErrorsOnChange
             {...form.getInputProps("mobile")}
           />
           <Flex align={"flex-end"}>

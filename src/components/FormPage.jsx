@@ -5,7 +5,14 @@ import styles from "./FormPage.module.css";
 
 const schema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
-  age: Yup.string().required("Age is required"),
+  age: Yup.string()
+    .required("Age is required")
+    .test("positive", "Age must be a positive integer", (value) => {
+      if (!value) {
+        return true; // Allow empty value to be handled by the 'required' validation
+      }
+      return /^[1-9][0-9]*$/.test(value); // Checks if the value is a positive integer
+    }),
   sex: Yup.string().required("Sex is required"),
   mobile: Yup.string().test(
     "is-valid-indian-mobile",
