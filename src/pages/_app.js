@@ -15,6 +15,13 @@ export default function App(props) {
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
+        <style>{`
+          @media (prefers-color-scheme: dark) {
+            :root {
+              --mantine-color-scheme: light !important;
+            }
+          }
+        `}</style>
       </Head>
 
       <MantineProvider
@@ -23,7 +30,8 @@ export default function App(props) {
         theme={{
           /** Put your mantine theme override here */
           colorScheme: "light",
-        }}>
+        }}
+        colorScheme='light'>
         <Script src='https://code.jquery.com/jquery-3.6.0.min.js'></Script>
         <Script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></Script>
         <Component {...pageProps} />

@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -38,7 +38,7 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
-}
+} */
 
 ::-webkit-scrollbar {
   display: none;
@@ -48,7 +48,7 @@ body {
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
   transition: all 2s ease-in-out;
-  /* background-color: black; */
+  background-color: white;
 }
 
 #usersTable_wrapper {
@@ -182,7 +182,7 @@ body {
   background-color: #ddd;
 } */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -246,4 +246,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */
