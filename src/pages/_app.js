@@ -15,13 +15,13 @@ export default function App(props) {
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
-        {/* <style>{`
+        <style>{`
           @media (prefers-color-scheme: dark) {
             :root {
               --mantine-color-scheme: light !important;
             }
           }
-        `}</style> */}
+        `}</style>
       </Head>
 
       <MantineProvider
