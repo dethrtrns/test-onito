@@ -97,7 +97,7 @@ export default function Home() {
               "url(https://www.onito.io/assets/img/brochure/doctors-group.png)",
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center 25vh",
           }
         }>
         {activeTab === "elegant" && (
@@ -115,7 +115,7 @@ export default function Home() {
           />
         )}
 
-        <Overlay opacity={0.1}>
+        <Overlay opacity={0}>
           <Box
             w={"100vw"}
             className={classes.logo}>
@@ -190,79 +190,81 @@ export default function Home() {
             <Tabs.Panel value='elegant'>Second panel</Tabs.Panel> */}
           </Tabs>
           <Flex
-            py={"10vh"}
-            justify={"center"}
-            align={"center"}></Flex>
-          <Modal
-            classNames={{
-              content: classes.overlay,
-              // overlay: classes.overlay,
-              // body: classes.overlay,
-              // header: classes.overlay,
-              // inner: classes.overlay,
-            }}
-            size={"100vw"}
-            yOffset='2vh'
-            xOffset='4vw'
-            overlayProps={{
-              opacity: 0,
-              blur: 0,
-            }}
-            withCloseButton={false}
-            transitionProps={{ transition: "fade", duration: 800 }}
-            opened={opened}
-            onClose={close}
-            scrollAreaComponent={ScrollArea.Autosize}>
-            {userTable && <UserTable onClose={close} />}
-            {!userTable &&
-              (activeTab === "required" ? (
-                <FormPage onClose={close} />
-              ) : (
-                <RegistrationForm onClose={close} />
-              ))}
-          </Modal>
-
-          <Flex
-            direction={"column"}
-            w={"100vw"}
-            h={"40%"}
-            justify={"space-between"}
+            // py={"2vh"}
+            h={"60vh"}
+            justify={"space-around"}
             align={"center"}>
-            {activeTab === "required" && (
-              <h2>Built Using react-form-hook and DataTables library</h2>
-            )}
-            <Button
-              // compact
-              className={activeTab === "elegant" && classes.glassmorphism}
-              rightIcon={activeTab === "elegant" && <IconClick />}
-              size='xl'
-              color='dark'
-              radius={0}
-              variant='outline'
-              onClick={() => {
-                setUserTable(false);
-                open();
-              }}>
-              REGISTER NOW
-            </Button>
-            <Button
-              component={activeTab === "required" && Link}
-              href={"/datatables"}
-              target='_blank'
-              className={activeTab === "elegant" && classes.glassmorphism}
-              rightIcon={activeTab === "elegant" && <IconUserSearch />}
-              size='xl'
-              color='dark'
-              radius={0}
-              onClick={() => {
-                if (activeTab === "elegant") {
-                  setUserTable(true);
-                  open();
-                }
+            <Modal
+              classNames={{
+                content: classes.overlay,
+                // overlay: classes.overlay,
+                // body: classes.overlay,
+                // header: classes.overlay,
+                // inner: classes.overlay,
               }}
-              variant='outline'>
-              View Our Users
-            </Button>
+              size={"100vw"}
+              yOffset='2vh'
+              xOffset='4vw'
+              overlayProps={{
+                opacity: 0,
+                blur: 0,
+              }}
+              withCloseButton={false}
+              transitionProps={{ transition: "fade", duration: 800 }}
+              opened={opened}
+              onClose={close}
+              scrollAreaComponent={ScrollArea.Autosize}>
+              {userTable && <UserTable onClose={close} />}
+              {!userTable &&
+                (activeTab === "required" ? (
+                  <FormPage onClose={close} />
+                ) : (
+                  <RegistrationForm onClose={close} />
+                ))}
+            </Modal>
+
+            <Flex
+              direction={"column"}
+              w={"100vw"}
+              h={"40%"}
+              justify={"space-between"}
+              align={"center"}>
+              {activeTab === "required" && (
+                <h2>Built Using react-form-hook and DataTables library</h2>
+              )}
+              <Button
+                // compact
+                className={activeTab === "elegant" && classes.glassmorphism}
+                rightIcon={activeTab === "elegant" && <IconClick />}
+                size='xl'
+                color='dark'
+                radius={0}
+                variant='outline'
+                onClick={() => {
+                  setUserTable(false);
+                  open();
+                }}>
+                REGISTER NOW
+              </Button>
+              <Button
+                component={activeTab === "required" && Link}
+                href={"/datatables"}
+                target='_blank'
+                className={activeTab === "elegant" && classes.glassmorphism}
+                rightIcon={activeTab === "elegant" && <IconUserSearch />}
+                size='xl'
+                color='dark'
+                radius={0}
+                onClick={() => {
+                  if (activeTab === "elegant") {
+                    setUserTable(true);
+                    open();
+                  }
+                }}
+                variant='outline'>
+                View Our Users
+              </Button>
+            </Flex>
           </Flex>
         </Overlay>
       </Container>
