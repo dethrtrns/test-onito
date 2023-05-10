@@ -84,10 +84,6 @@ export default function Home() {
           name='viewport'
           content='width=device-width, initial-scale=1'
         />
-        <link
-          rel='icon'
-          href='/onito-logo.png'
-        />
       </Head>
       <Container
         fluid
