@@ -56,32 +56,38 @@ export default function FormPage({ onClose }) {
   const { errors } = formState;
 
   const onSubmit = async (data) => {
+    // data is the post data from the form. We can use it to call the API and get back the results.
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([_, value]) => value !== "")
-    );
+    ); // filter out any empty values from the data.
     if (filteredData.gaurdianLabel && filteredData.gaurdianName) {
       filteredData.gaurdian =
-        filteredData.gaurdianLabel + " " + filteredData.gaurdianName;
+        filteredData.gaurdianLabel + " " + filteredData.gaurdianName; // add gaurdian property to filteredData object, combining “label” and “name”. “label” is the label from the dropdown, and “name” is the value from the input field "name"
+      //because the server expects just a gaurdian property not separate “label” and “name”, we need to add it back in.
       delete filteredData.gaurdianLabel;
-      delete filteredData.gaurdianName;
+      delete filteredData.gaurdianName; // remove these from the filteredData so that it's not sent to the server.
     }
     try {
+      // try catch for post request. If it fails, it will throw an error.
       const response = await fetch("api/add", {
-        method: "POST",
+        // using fetch to make a post request to the server.
+        method: "POST", // setting the method to post.
         headers: {
           "Content-Type": "application/json",
-        },
+        }, //sets the content type to json, which is the default for form post data.
         body: JSON.stringify(filteredData),
-      });
-      const responseData = await response.json();
-      console.log(responseData);
+      }); //stringifies the filteredData object and sets it as the body of the post.
+
+      const responseData = await response.json(); //converts the response body to a json object.
+      console.log(responseData); //logs the response data to the console.
       reset(); // Reset the form fields
     } catch (error) {
-      console.error(error);
+      console.error(error); //logs any errors.
     }
-  };
+  }; // end of onSubmit function.
 
   return (
+    // the html for the form.
     <form
       className={styles.formContainer}
       onSubmit={handleSubmit(onSubmit)}>
